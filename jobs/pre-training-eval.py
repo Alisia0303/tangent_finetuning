@@ -19,6 +19,8 @@ import pprint
 import random
 import copy
 
+os.chdir("../")
+
 class cfgc(object):
     backbonename = 'ViT-B/16'
     NCTX = 16
@@ -141,7 +143,7 @@ class_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "
 mapping_class_idx_name = dict()
 for idx in range(len(class_names)):
     mapping_class_idx_name[idx] = class_names[idx]
-    
+
 all_classes_text = []
 for i in range(len(class_names)):
     text_prompts = f"A photo of class {mapping_class_idx_name[i]}" 
