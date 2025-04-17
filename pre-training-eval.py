@@ -1,4 +1,4 @@
-from lib.config import cfg, cfg_from_file
+from lib.config import cfg
 from lib.utils import *
 from data.dataset import *
 from models import load_clip
@@ -8,18 +8,10 @@ from torch.utils.data import DataLoader
 from timm.utils import accuracy
 from utils.vision import *
 
-import os
 import numpy as np
 import torch
-from timm.models import create_model
 import random
-import argparse
-import time
-import pprint
 import random
-import copy
-
-os.chdir("../")
 
 class cfgc(object):
     backbonename = 'ViT-B/16'
