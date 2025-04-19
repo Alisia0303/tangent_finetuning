@@ -7,14 +7,9 @@ from timm.models.layers import PatchEmbed, Mlp, DropPath, trunc_normal_, lecun_n
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD, IMAGENET_INCEPTION_MEAN, IMAGENET_INCEPTION_STD
 from timm.models.helpers import build_model_with_cfg, resolve_pretrained_cfg, named_apply, adapt_input_conv, checkpoint_seq
 from timm.models.registry import register_model
-from models.prompt import Prompt
 from models.sinkhorn_ops import *
-from lib.config import cfg
-import warnings
 import torch
-import torchvision
 from torch import nn
-from d2l import torch as d2l
 import timm
 
 def _cfg(url='', **kwargs):
