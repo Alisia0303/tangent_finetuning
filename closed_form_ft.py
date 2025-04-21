@@ -62,7 +62,7 @@ def set_seed(seed):
     random.seed(cfg.seed)
 
 set_seed(cfg.seed)
-cfg.device = torch.device('cuda:1')
+cfg.device = torch.device('cuda:0')
 
 # 1. Define transform
 transform = transforms.Compose([

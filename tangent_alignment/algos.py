@@ -66,7 +66,9 @@ def closed_form_linear_clip(clip_model, train_loader, text_tokens, config):
         output = functional_call(clip_model, state_dict, ((image, text_tokens),))
 
         logits, _ = output  # Shape: [1, num_classes]
-        return logits.squeeze(0).softmax(dim=0)  # Shape: [num_classes]
+
+        import pdb; pdb.set_trace()
+        return logits.squeeze(0).softmax(dim=1)  # Shape: [num_classes]
 
 
     
@@ -89,7 +91,7 @@ def closed_form_linear_clip(clip_model, train_loader, text_tokens, config):
                 
                 # Stop early
                 for slice_idx in range(num_slices):
-                    if slice_idx == 10: # after q_proj
+                    if slice_idx == 5: # after q_proj
                         break
 
                     start_time = time.time()
@@ -137,7 +139,7 @@ def closed_form_linear_clip(clip_model, train_loader, text_tokens, config):
                         torch.cuda.empty_cache()
 
                     # After processing all batches for this slice, solve the system
-                    global_At_A = global_At_A + 1e-3 * torch.eye(global_At_A.shape[0]).to(config.device)
+                    global_At_A = global_At_A + 1e-4 * torch.eye(global_At_A.shape[0]).to(config.device)
                     
                     # Compute eigendecomposition
                     eigenvalues, eigenvectors = torch.linalg.eigh(global_At_A)

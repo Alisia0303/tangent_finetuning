@@ -33,7 +33,7 @@ root.is_mini_imagenet = False
 
 # Closed form
 root.slice_size = 32
-root.target_rank = 32
+root.target_rank = 0
 
 root.lora_config = edict()
 root.lora_config.target_modules = ['visual.transformer.resblocks.11.attn.in_proj_weight']
