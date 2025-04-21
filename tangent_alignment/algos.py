@@ -137,7 +137,7 @@ def closed_form_linear_clip(clip_model, train_loader, text_tokens, config):
                         torch.cuda.empty_cache()
 
                     # After processing all batches for this slice, solve the system
-                    global_At_A = global_At_A + 1e-4 * torch.eye(global_At_A.shape[0]).to(config.device)
+                    global_At_A = global_At_A + 1e-3 * torch.eye(global_At_A.shape[0]).to(config.device)
                     
                     # Compute eigendecomposition
                     eigenvalues, eigenvectors = torch.linalg.eigh(global_At_A)
