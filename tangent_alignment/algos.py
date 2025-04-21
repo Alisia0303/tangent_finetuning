@@ -67,7 +67,6 @@ def closed_form_linear_clip(clip_model, train_loader, text_tokens, config):
 
         logits, _ = output  # Shape: [1, num_classes]
 
-        import pdb; pdb.set_trace()
         return logits.squeeze(0).softmax(dim=1)  # Shape: [num_classes]
 
 
