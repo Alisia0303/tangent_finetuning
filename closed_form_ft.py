@@ -62,7 +62,7 @@ def set_seed(seed):
     random.seed(cfg.seed)
 
 set_seed(cfg.seed)
-cfg.device = torch.device('cuda:0')
+cfg.device = torch.device('cuda:1')
 
 # 1. Define transform
 transform = transforms.Compose([
@@ -90,14 +90,14 @@ test_dataset = datasets.CIFAR10(
 # 3. Create data loaders
 train_loader = DataLoader(
     train_dataset,
-    batch_size=64,
+    batch_size=16,
     shuffle=True,
     num_workers=2
 )
 
 test_loader = DataLoader(
     test_dataset,
-    batch_size=64,
+    batch_size=16,
     shuffle=False,
     num_workers=2
 )
@@ -116,7 +116,6 @@ print('number of params:', n_parameters) #150M
 
 for n, p in clip_model.named_parameters():
     p.requires_grad = False
-
 
 # 5. Handle text labels
 def labels_to_text(labels, class_names):
@@ -146,4 +145,7 @@ for i in range(len(class_names)):
 # 6. Evaluate the whole CIFAR10 test sets.
 text_tokens = load_clip.tokenize(all_classes_text).to(cfg.device)
 
-evaluate(clip_model, test_loader, cfg.device, task_id=0, class_mask=None, text_tokens=text_tokens) #'Acc@1': 82.51
+# 7. Closed form solution
+updated_clip_model = closed_form_linear_clip(clip_model, train_loader, text_tokens, cfg)
+
+evaluate(updated_clip_model, test_loader, cfg.device, task_id=0, class_mask=None, text_tokens=text_tokens) #Acc@1 81.730 Acc@5 97.930 loss 2.261

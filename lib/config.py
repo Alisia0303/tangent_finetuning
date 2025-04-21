@@ -9,7 +9,7 @@ cfg = root
 root.prompt_tuning_path = 'config/prompt_tuning.json'
 
 root.run_label = 'merlin'
-root.gpu_ids = '0'
+root.gpu_ids = '1'
 root.verbose = False
 root.device = None
 
@@ -30,6 +30,19 @@ root.input_size = 0
 root.is_cifar_10 = False
 root.is_cifar_100 = False
 root.is_mini_imagenet = False
+
+# Closed form
+root.slice_size = 32
+root.target_rank = 32
+
+root.lora_config = edict()
+root.lora_config.target_modules = ['visual.transformer.resblocks.11.attn.in_proj_weight']
+# lora_config:
+#   target_modules:
+#     # - v_porj
+#     # - q_proj
+
+#     - encoder.layers.11.self_attn.q_proj
 
 # Placeholders
 root.timestamp = 'placeholder'
